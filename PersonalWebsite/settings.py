@@ -4,7 +4,7 @@ from django.contrib import messages
 from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'test'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1'] For Debug False Or Deploy Mod
@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -143,8 +143,8 @@ CKEDITOR_CONFIGS = {
 }
 
 # Recaptcha config
-RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY') # Site Key - > Google Admin
-RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY') # Secret Key Google Admin
+RECAPTCHA_PUBLIC_KEY = '6LdWYWYhAAAAABDPNnc3TEZfORf5v63DPtIZ_BjS'
+RECAPTCHA_PRIVATE_KEY = '6LdWYWYhAAAAAMdd5aKQ8bTSpUK1i-64ruj7U4aF'
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
