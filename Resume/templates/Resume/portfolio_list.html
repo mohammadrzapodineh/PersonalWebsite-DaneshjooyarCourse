@@ -1,0 +1,70 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block title %}
+    نمونه کار های من
+{% endblock %}
+{% block content %}
+  <!-- Start single page header -->
+  <section id="single-page-header">
+    <div class="overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-left">
+              <h2>نمونه کارها</h2>
+              <p>در این صفحه شما میتوانید نمونه کار های بنده را مشاهده کنید</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-right">
+              <ol class="breadcrumb">
+                <li><a href="{% url 'Home:home_page' %}">خانه</a></li>
+                <li class="active">نمونه کارها</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End single page header -->
+
+  <!-- Start portfolio -->
+  <section id="portfolio">
+    <div class="portfolio-area">
+        <!-- portfolio menu -->
+       <div class="portfolio-menu">
+         <ul>
+             <a href="{% url 'Resume:portfolio_list' %}"><li class="{% if current_category %}{% else %}active{% endif %}" data-filter="all">همه</li></a>
+             {% for category in categories %}
+                 <a  href="{% url 'Resume:portfolio_category_list' category.id %}"><li class="{% if current_category.id == category.id %}active{% endif %}"  data-filter="all">{{ category }}</li></a>
+
+             {% endfor %}
+
+
+         </ul>
+       </div>
+       <!-- Portfolio container -->
+       <div id="mixit-container" class="portfolio-container">
+        {% for portfoilo in portfolios %}
+             <div class="single-portfolio">
+           <div class="single-item">
+             <img src="{{ portfoilo.mini_image.url }}" alt="img">
+             <div class="single-item-content">
+                <a class="fancybox view-icon" data-fancybox-group="gallery" href="{{ portfoilo.big_image.url }}"><i class="fa fa-search-plus"></i></a>
+                <div class="portfolio-title">
+                  <h4>{{ portfoilo.title }}</h4>
+                  <span>{{ portfoilo.categories.all|join:',' }}</span>
+                </div>
+             </div>
+           </div>
+         </div>
+            {% empty %}
+            <p class="text-danger text-center">نمونه کاری یافت نشد</p>
+           {% endfor %}
+
+       </div>
+    </div>
+  </section>
+  <!-- End portfolio -->
+{% endblock %}

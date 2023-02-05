@@ -1,0 +1,150 @@
+{% extends 'Base/base.html' %}
+{% load jalali_tags %}
+{% load widget_tweaks %}
+{% block content %}
+      <!-- Start single page header -->
+  <section id="single-page-header">
+    <div class="overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-left">
+              <h2>{{ article.title }}</h2>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-right">
+              <ol class="breadcrumb">
+                <li><a href="{% url 'Home:home_page' %}">خانه</a></li>
+                <li class="active">بلاگ تکی</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End single page header -->
+
+  <!-- Start blog archive -->
+  <section id="blog-archive">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="blog-archive-area">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <div class="blog-archive-left">
+                  <!-- Start blog news single -->
+                  <article class="blog-news-single">
+                    <div class="blog-news-img">
+                      <img src="{{ article.image.url }}" alt="image">
+                    </div>
+                    <div class="blog-news-title">
+                      <h2><a href="blog-single-with-left-sidebar.html">عنوان این خبر</a></h2>
+                    <p>توسط <a class="blog-author" href="#">{{ article.author }}</a> <span class="blog-date">{{ article.get_created_to_jalali }}</span></p>
+                    </div>
+                    <div class="blog-news-details blog-single-details">
+                        {{ article.description|safe }}
+                      <div class="blog-single-bottom">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <div class="blog-single-tag">
+                              <span class="fa fa-tags"></span>
+                                {% for tag in article.tags.all %}
+                                     <a href="#">{{ tag }},</a>
+                                {% endfor %}
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <!-- Start blog navigation -->
+                  <div class="blog-navigation-area">
+                      {% for random_article in random_articles %}
+                          <div class="blog-navigation-{% if forloop.first %}prev{% else %}next{% endif %}">
+                      <a href="{% url 'Blog:blog_detail' random_article.id %}">
+                        <h5>{{ random_article.title }}</h5>
+                        <span>مطلب تصادفی</span>
+                      </a>
+                    </div>
+                      {% endfor %}
+
+
+                  </div>
+                    <div class="comments-box-area">
+                         {% for comment in comments %}
+                             <div class="item">
+                <div class="item-text active">
+                    <div class="item-info">
+                        <span class="name">{{ comment.name }}</span>
+                        <span class="main">{{ comment.created|to_jalali:'%Y/%m/%d' }}</span>
+                    </div>
+                    <p>{{ comment.text }}
+                      </p>
+                </div>
+                             <hr>
+
+
+                  </div>
+                             {% empty %}
+                             <p class="text-danger" >
+                             تا کنون کامنتی درج نشده است
+                             </p>
+                        {% endfor %}
+                </div>
+                   <div class="comments-box-area">
+                    <h2>یک نظر بدهید</h2>
+                    <form action="" class="comments-form" method="post" novalidate>
+                        {% csrf_token %}
+                       <div class="form-group">
+                        {{ comment_form.name|attr:'placeholder:نام شما'|attr:'class:form-control' }}
+                           {% for error in comment_form.name.errors %}
+                               <p class="text-danger">
+                               {{ error }}
+                               </p>
+                           {% endfor %}
+                      </div>
+                      <div class="form-group">
+                   {{ comment_form.email|attr:'placeholder:ایمیل شما'|attr:'class:form-control' }}
+                            {% for error in comment_form.email.errors %}
+                               <p class="text-danger">
+                               {{ error }}
+                               </p>
+                           {% endfor %}
+                      </div>
+                       <div class="form-group">
+                        {{ comment_form.text|add_class:'form-control' }}
+                           {% for error in comment_form.text.errors %}
+                               <p class="text-danger">
+                               {{ error }}
+                               </p>
+                           {% endfor %}
+                      </div>
+                        <div class="form-group">
+                            {{ comment_form.captcha }}
+                             {% for error in comment_form.captcha.errors %}
+                               <p class="text-danger">
+                               {{ error }}
+                               </p>
+
+                           {% endfor %}
+                      </div>
+                      <button type="submit" class="comment-btn">ثبت نظر</button>
+                    </form>
+                  </div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block title %}
+    {{ article.title }}
+{% endblock %}

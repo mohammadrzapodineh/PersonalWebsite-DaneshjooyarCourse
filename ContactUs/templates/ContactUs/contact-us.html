@@ -1,0 +1,117 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}تماس با من{% endblock %}
+{% block content %}
+  <!-- Start single page header -->
+  <section id="single-page-header">
+    <div class="overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-left">
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-right">
+              <ol class="breadcrumb">
+                <li><a href="{% url 'Home:home_page' %}">خانه</a></li>
+                <li class="active">تماس</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End single page header -->
+  <!-- Start contact section  -->
+  <section id="contact">
+     <div class="container">
+       <div class="row">
+         <div class="col-md-12">
+           <div class="title-area">
+              <h2 class="title">سوالی دارید؟</h2>
+              <span class="line"></span>
+            </div>
+         </div>
+         <div class="col-md-12">
+           <div class="cotact-area">
+             <div class="row">
+               <div class="col-md-4">
+                 <div class="contact-area-left">
+                   <h4>اطلاعات تماس</h4>
+                   <address class="single-address">
+                     <p>{{ setting.address }}</p>
+                     <p>{{ setting.email }}</p>
+                     <p>{{ setting.phone_number }}</p>
+                   </address>
+                   <div class="footer-right contact-social">
+                      {% for social in social_media %}
+                        <a href="{{ social.url }}"><i class="fa fa-{{ social.icon }}"></i></a>
+                    {% endfor %}
+                    </div>
+                 </div>
+               </div>
+               <div class="col-md-8">
+                 <div class="contact-area-right">
+                   <form action="" class="comments-form contact-form" method="post" novalidate>
+                       {% csrf_token %}
+                       <div class="form-group">
+                      {{ form.name|attr:'placeholder:نام شما'|attr:'class:form-control' }}
+                        {% for error in form.name.errors %}
+                            <p class="text-danger">
+                            {{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                      {{ form.email|attr:'placeholder:ایمیل شما'|attr:'class:form-control'}}
+                         {% for error in form.email.errors %}
+                            <p class="text-danger">
+                            {{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                     <div class="form-group">
+                        {{ form.subject|attr:'placeholder:موضوع پیام'|attr:'class:form-control' }}
+                          {% for error in form.subject.errors %}
+                            <p class="text-danger">
+                            {{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.text|attr:'placeholder:پیغام شما'|attr:'class:form-control' }}
+                         {% for error in form.text.errors %}
+                            <p class="text-danger">
+                            {{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.captcha }}
+                                 {% for error in form.captcha.errors %}
+                            <p class="text-danger">
+                            {{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                    <button class="comment-btn">ثبت پیام</button>
+                  </form>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+  </section>
+  <!-- End contact section  -->
+  <!-- Start google map -->
+  <section id="google-map">
+    <iframe src="{{ setting.map_address }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </section>
+  <!-- End google map -->
+
+{% endblock %}

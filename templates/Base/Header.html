@@ -1,0 +1,102 @@
+  <!-- BEGAIN PRELOADER -->
+  <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div>
+  <!-- END PRELOADER -->
+
+  <!-- SCROLL TOP BUTTON -->
+  <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+  <!-- Start header -->
+  <header id="header">
+    <!-- header top search -->
+    <div class="header-top">
+      <div class="container">
+        <form action="">
+          <div id="search">
+          <input type="text" placeholder="کلمه مورد نظر را نوشته و اینتر را بزنید..." name="s" id="m_search" style="display: inline-block;">
+          <button type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        </form>
+      </div>
+    </div>
+    <!-- header bottom -->
+    <div class="header-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="header-contact">
+              <ul>
+                <li>
+                  <div class="phone">
+                    <i class="fa fa-phone"></i>
+                   {{ setting.phone_number }}
+                  </div>
+                </li>
+                <li>
+                  <div class="mail">
+                    <i class="fa fa-envelope"></i>
+                   {{ setting.email }}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- End header -->
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} text-right" role="alert">
+  <strong>پیام جدید:!</strong>  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+      {% endfor %}
+  {% endif %}
+
+  <!-- BEGIN MENU -->
+   <section id="menu-area">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">تغییر وضعیت</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- LOGO -->
+          <!-- TEXT BASED LOGO -->
+          <a class="navbar-brand" href="{% url 'Home:home_page' %}">وبسایت شخصی من</a>
+          <!-- IMG BASED LOGO  -->
+           <!-- <a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="logo"></a> -->
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
+            <li class="{% if request.path == "/" %}active{% endif %}"><a href="{% url 'Home:home_page' %}">خانه</a></li>
+            <li class="{% if request.path == "/portfolio/" %}active{% endif %}"><a href="{% url 'Resume:portfolio_list' %}">نمونه کارها</a></li>
+            <li class="{% if request.path == "/blog/" %}active{% endif %}">
+              <a href="{% url 'Blog:blog_list' %}"  >وبلاگ</a>
+            </li>
+            <li class="{% if request.path == "/contact-us/" %}active{% endif %}">
+            <a href="{% url 'ContactUs:contact_us_page' %}">تماس</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+        <a href="#" id="search-icon">
+          <i class="fa fa-search">
+          </i>
+        </a>
+      </div>
+    </nav>
+  </section>
+  <!-- END MENU -->
+
+  <!-- Start slider -->

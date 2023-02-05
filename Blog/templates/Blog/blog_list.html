@@ -1,0 +1,104 @@
+{% extends 'Base/base.html' %}
+{% block title %}
+وبلاگ من
+{% endblock title %}
+{% block content %}
+  <!-- Start single page header -->
+  <section id="single-page-header">
+    <div class="overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-left">
+              <h2>آرشیو وبلاگ</h2>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="single-page-header-right">
+              <ol class="breadcrumb">
+                <li><a href="{% url 'Home:home_page' %}">خانه</a></li>
+                <li class="active">آرشیو وبلاگ</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End single page header -->
+
+  <!-- Start blog archive -->
+  <section id="blog-archive">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="blog-archive-area">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="blog-archive-left">
+                    {% for article in articles %}
+                        {% include 'Blog/article_component.html'  with article=article col_num=False %}
+                        {% empty %}
+                        <p class="text-danger text-center">
+                        مقاله ای یافت نشد
+                        </p>
+                    {% endfor %}
+                    {% if articles %}
+                          <div class="blog-pagination">
+                    <ul class="pagination-nav">
+                        {% for page in articles.paginator.page_range %}
+                            <li><a {{ articles.numberr }} class="{% if page == articles.number %}active_link{% endif %}" href="
+
+                        {% if q %}?q={{ q }}&page={{ page }}{% else %}?page={{ page }}{% endif %}">{{ page }}</a></li>
+                        {% endfor %}
+
+                    </ul>
+                  </div>
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <aside class="blog-side-bar">
+                  <!-- Start sidebar widget -->
+                  <div class="sidebar-widget">
+                    <!-- Start blog search -->
+                    <form action="" method="get">
+                      <div class="search-group">
+                        <button type="submit" class="blog-search-btn"><span class="fa fa-search"></span></button>
+                        <input name="q" type="search" placeholder="جستجو">
+                      </div>
+                    </form>
+                    <!-- End blog search -->
+                  </div>
+                  <!-- Start sidebar widget -->
+                  <div class="sidebar-widget">
+                    <h4 class="widget-title">برچسب ها</h4>
+                    <div class="tag-cloud">
+                     {% for tag in tags %}
+                          <a href="{% url 'Blog:blog_tag' tag.name %}" class="{% if tag.name == tag_title %}active_link{% endif %}">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                  </div>
+                  <div class="sidebar-widget">
+                    <h4 class="widget-title">مقالات پرطرفدار</h4>
+                    <ul>
+                      {% for  popular_article in popular_articles %}
+                          <li><a href="{% url 'Blog:blog_detail'  popular_article.id%}">{{ popular_article.title }}</a></li>
+                          {% empty %}
+                          <li>
+                          <p class="text-danger text-center">مقاله ای یافت نشد</p>
+                          </li>
+                        {% endfor %}
+
+                    </ul>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End blog archive -->
+{% endblock content %}
