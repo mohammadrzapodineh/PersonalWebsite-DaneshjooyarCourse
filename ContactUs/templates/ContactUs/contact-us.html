@@ -57,46 +57,7 @@
                  <div class="contact-area-right">
                    <form action="" class="comments-form contact-form" method="post" novalidate>
                        {% csrf_token %}
-                       <div class="form-group">
-                      {{ form.name|attr:'placeholder:نام شما'|attr:'class:form-control' }}
-                        {% for error in form.name.errors %}
-                            <p class="text-danger">
-                            {{ error }}
-                            </p>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                      {{ form.email|attr:'placeholder:ایمیل شما'|attr:'class:form-control'}}
-                         {% for error in form.email.errors %}
-                            <p class="text-danger">
-                            {{ error }}
-                            </p>
-                        {% endfor %}
-                    </div>
-                     <div class="form-group">
-                        {{ form.subject|attr:'placeholder:موضوع پیام'|attr:'class:form-control' }}
-                          {% for error in form.subject.errors %}
-                            <p class="text-danger">
-                            {{ error }}
-                            </p>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.text|attr:'placeholder:پیغام شما'|attr:'class:form-control' }}
-                         {% for error in form.text.errors %}
-                            <p class="text-danger">
-                            {{ error }}
-                            </p>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.captcha }}
-                                 {% for error in form.captcha.errors %}
-                            <p class="text-danger">
-                            {{ error }}
-                            </p>
-                        {% endfor %}
-                    </div>
+                        {{ form }}
                     <button class="comment-btn">ثبت پیام</button>
                   </form>
                  </div>

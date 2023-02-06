@@ -11,6 +11,7 @@ class ContactUsForm(forms.Form):
 
 
                                                                   # ))
+    template_name = 'ContactUs/contact_form.html'
     name = forms.CharField(max_length=110, required=True, error_messages={'required': 'این فیلد باید پر شود'})
     subject = forms.CharField(max_length=110)
     email = forms.EmailField(error_messages={'invalid': 'ایمیل اشتباه است دوست من '})

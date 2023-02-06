@@ -4,8 +4,8 @@ from django.contrib import messages
 from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'test'
-DEBUG = True
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=True)
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1'] For Debug False Or Deploy Mod
 ALLOWED_HOSTS = [] # for Debug True
@@ -85,12 +85,11 @@ WSGI_APPLICATION = 'PersonalWebsite.wsgi.application'
 #     }
 # }
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
+
     }
 }
 
@@ -121,11 +120,11 @@ USE_I18N = True
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -143,8 +142,8 @@ CKEDITOR_CONFIGS = {
 }
 
 # Recaptcha config
-RECAPTCHA_PUBLIC_KEY = '6LdWYWYhAAAAABDPNnc3TEZfORf5v63DPtIZ_BjS'
-RECAPTCHA_PRIVATE_KEY = '6LdWYWYhAAAAAMdd5aKQ8bTSpUK1i-64ruj7U4aF'
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY') # Site Key - > Google Admin
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY') # Secret Key Google Admin
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
