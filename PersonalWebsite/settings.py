@@ -4,11 +4,11 @@ from django.contrib import messages
 from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=True)
+SECRET_KEY = 'test'
+DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1'] For Debug False Or Deploy Mod
-ALLOWED_HOSTS = [] # for Debug True
+ALLOWED_HOSTS = ['mohammadrzapodineh.ir', 'www.mohammadrzapodineh.ir'] # for Debug True
 
 
 # Application definition
@@ -74,22 +74,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'PersonalWebsite.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST'),
-#         'PORT': config('DB_PORT')
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -122,10 +110,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'assets'
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, '../public_html/static')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../public_html/media')
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -142,8 +130,8 @@ CKEDITOR_CONFIGS = {
 }
 
 # Recaptcha config
-RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY') # Site Key - > Google Admin
-RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY') # Secret Key Google Admin
+RECAPTCHA_PUBLIC_KEY = '6LcK0xkhAAAAANXlIz5lkQqHSTWLIAeqQyNdDyS7' # Site Key - > Google Admin
+RECAPTCHA_PRIVATE_KEY = '6LcK0xkhAAAAAL29P07xOq523-QWhW12PP4c2BRe' # Secret Key Google Admin
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success',

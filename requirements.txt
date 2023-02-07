@@ -1,0 +1,14 @@
+asgiref==3.5.2
+Django==3.2
+django-ckeditor==6.4.2
+django-jalali-date==1.0.1
+django-js-asset==2.0.0
+django-recaptcha==3.0.0
+django-taggit==3.0.0
+django-widget-tweaks==1.4.12
+jdatetime==4.1.0
+Pillow==9.2.0
+python-decouple==3.6
+pytz==2022.7.1
+sorl-thumbnail==12.8.0
+sqlparse==0.4.3
