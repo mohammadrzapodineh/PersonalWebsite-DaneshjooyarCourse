@@ -112,8 +112,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'assets'
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, '../public_html/static')
-MEDIA_ROOT = os.path.join(BASE_DIR, '../public_html/media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
