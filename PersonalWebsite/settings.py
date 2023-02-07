@@ -8,7 +8,7 @@ SECRET_KEY = 'test'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1'] For Debug False Or Deploy Mod
-ALLOWED_HOSTS = ['mohammadrzapodineh.ir', 'www.mohammadrzapodineh.ir'] # for Debug True
+ALLOWED_HOSTS = [] # for Debug True
 
 
 # Application definition
